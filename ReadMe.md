@@ -6,7 +6,7 @@ VISIT THE LINK TO SEE- https://zoom-videomeeting-clone.onrender.com
 - Created real-time chatting while Video Meeting
 
 # Tech Stack: 
-NODEJS
+NodeJs
 
 # Dependencies-Used:
 - Peerjs
