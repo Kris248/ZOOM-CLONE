@@ -3,10 +3,11 @@
 - Connecting other users through Link
 - Created real-time chatting while Video Meeting
 
-# Tech-Used:
+# Dependencies-Used:
 - Peerjs
 - peer
 - socket.io
 - uuid: For generating unique ID.
 - express
-- 
+- cors
+- ejs
