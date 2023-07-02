@@ -11,3 +11,5 @@
 - express
 - cors
 - ejs
+
+![Screenshot (14)](https://github.com/Kris248/ZOOM-CLONE/assets/92295923/127b0c90-7082-4e20-8712-86eae9db28dc)
