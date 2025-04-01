@@ -14,10 +14,10 @@ app.set('view engine', 'ejs'); // setting engine
 app.use(express.static('public')); // IMP to include public files.
 app.use('/peerjs', peerServer);
 
+app.get('/', (req, res) => {
+  res.render('home');  // Landing page dikhane ke liye
+});
 
-app.get('/', (req,res)=>{ 
-  res.redirect(`/${uuidv4()}`);
-}) // create uniq id in URL
 
 app.get('/:room', (req,res)=>{
   res.render('room', {roomId: req.params.room})
@@ -40,7 +40,6 @@ io.on('connection', socket => {
 })
 
 
-
-server.listen(3030);// server ko listen karo
-
-
+server.listen(3001, () => {
+  console.log('Server running at http://localhost:3001');
+});

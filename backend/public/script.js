@@ -30,6 +30,23 @@ navigator.mediaDevices.getUserMedia({
     connectToNewUser(userId, stream);
   });
 
+  socket.on('user-disconnected', userId => {
+    console.log(`User ${userId} disconnected`);
+    if (connectedUsers[userId]) {
+      connectedUsers[userId].close(); // PeerJS call ko close karo
+    }
+    removeVideo(userId); // Frontend se video hatao
+  });
+  
+  const removeVideo = (userId) => {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+      if (video.getAttribute('data-userid') === userId) {
+        video.remove(); // Video element hatao
+      }
+    });
+  };  
+
   let text = $("input")
   // when press enter send message
   $('html').keydown(function (e) {
@@ -65,13 +82,15 @@ const connectToNewUser = (userId, stream) => {
   connectedUsers[userId] = call;
 };
 
-const addVideoStream = (video, stream) => {
-  video.srcObject = stream;
-  video.addEventListener('loadedmetadata', () => {
-    video.play();
-  });
+const addVideoStream = (video, stream, userId) => {
+    video.srcObject = stream;
+    video.setAttribute('data-userid', userId); // Video element ko userId assign karo
+    video.addEventListener('loadedmetadata', () => {
+      video.play();
+    });
     videoGrid.append(video);
-};
+  };
+  
 
 const scrollToBottom = () => {
   var d = $('.main__chat_window');
@@ -132,3 +151,10 @@ const setPlayVideo = () => {
   `;
   document.querySelector('.main__video_button').innerHTML = html;
 };
+
+const leaveMeeting = () => {
+    socket.emit('user-disconnected', peer.id); // Server ko batao user gaya
+    peer.destroy(); // PeerJS connection close karo
+    window.location.href = "/"; // Home page pe redirect karo ya jo bhi exit ka logic ho
+  };
+  

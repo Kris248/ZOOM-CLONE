@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="home-container">
+        <h1>Welcome to Zoom Clone</h1>
+        <button onclick="startMeeting()">Start New Meeting</button>
+    </div>
+
+    <script>
+        function startMeeting() {
+            window.location.href = "/" + Math.random().toString(36).substr(2, 9); 
+        }
+    </script>
+</body>
+</html>
