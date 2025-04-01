@@ -5,16 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoom Clone</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .home-container {
+            text-align: center;
+            margin-top: 100px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        input {
+            padding: 14px;
+            font-size: 16px;
+            width: 250px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="home-container">
         <h1>Welcome to Zoom Clone</h1>
-        <button onclick="startMeeting()">Start New Meeting</button>
+        <div>
+            <input type="text" id="username" placeholder="Enter Your Name">
+        </div>
+        <div class="join-container">
+            <input type="text" id="meetCode" placeholder="Enter Meet Code">
+            <button onclick="joinMeeting()">Join Meeting</button>
+        </div>
+        <p>or</p>
+        <button onclick="startMeeting()">Start Instant Meeting</button>
     </div>
 
     <script>
         function startMeeting() {
-            window.location.href = "/" + Math.random().toString(36).substr(2, 9); 
+            const username = document.getElementById('username').value.trim();
+            if (!username) {
+                alert('Please enter your name before starting.');
+                return;
+            }
+            const roomId = Math.random().toString(36).substr(2, 9);
+            window.location.href = `/${roomId}?username=${encodeURIComponent(username)}`;
+        }
+
+        function joinMeeting() {
+            const meetCode = document.getElementById('meetCode').value.trim();
+            const username = document.getElementById('username').value.trim();
+            if (!username) {
+                alert('Please enter your name before joining.');
+                return;
+            }
+            if (meetCode) {
+                window.location.href = `/${meetCode}?username=${encodeURIComponent(username)}`;
+            } else {
+                alert('Please enter a meeting code');
+            }
         }
     </script>
 </body>

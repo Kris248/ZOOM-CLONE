@@ -1,97 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoom Clone | Video Meeting</title>
     
     <script>
-      const ROOM_ID = "<%= roomId %>";
+        const ROOM_ID = "<%= roomId %>";
+        const USERNAME = new URLSearchParams(window.location.search).get('username') || "Guest";
     </script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-   <script  src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-   <script src="/socket.io/socket.io.js" ></script>
-   <link rel="stylesheet" href="style.css">
-   <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
-   <style>
-      #video-grid{
-         display: flex;
-         justify-content: center;
-         transform: scaleX(-1);
-         flex-wrap: wrap;
-      }
-      video{
-         height: 300px;
-         width: 400px;
-         object-fit: cover;
-         padding: 8px;
-      }
-   </style>
-
-  </head>
-  <body>
-   
-
+    <style>
+        #video-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .video-container {
+            position: relative;
+            margin: 10px;
+        }
+        video {
+            height: 250px;
+            width: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .username-label {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        .main {
+            display: flex;
+            height: 100vh;
+        }
+        .main__left {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+        }
+        .main__videos {
+            flex-grow: 1;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        .main__right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1c1c1c;
+            color: white;
+            padding: 10px;
+        }
+        .main__controls {
+            display: flex;
+            justify-content: space-between;
+            background: #222;
+            padding: 10px;
+        }
+        .main__controls__button {
+            background: #444;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .leave_meeting {
+            color: red;
+        }
+        .main__chat_window {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: #333;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+        }
+        .messages li {
+            padding: 5px;
+            border-bottom: 1px solid #555;
+        }
+        .main__message_container {
+            display: flex;
+            padding: 10px;
+            background: #222;
+        }
+        .main__message_container input {
+            flex-grow: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
     <div class="main">
-      <div class="main__left">
-         <div class="main__videos">
-            
-            <div id="video-grid">
-      
+        <div class="main__left">
+            <div class="main__videos">
+                <div id="video-grid"></div>
             </div>
-         </div>
-         <div class="main__controls">
-            <div class="main__controls__block">
-               <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
-                  <i class="fas fa-microphone"></i>
-                  <span>Mute</span>
-               </div>
-               <div onclick="playStop()" class="main__controls__button main__video_button" >
-                  <i class="fas fa-video"></i>
-                  <span>Stop Video</span>
-               </div>
+            <div class="main__controls">
+                <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
+                    <i class="fas fa-microphone"></i>
+                    <span>Mute</span>
+                </div>
+                <div onclick="playStop()" class="main__controls__button main__video_button">
+                    <i class="fas fa-video"></i>
+                    <span>Stop Video</span>
+                </div>
+                <div onclick="copyMeetCode()" class="main__controls__button">
+                    <i class="fas fa-copy"></i>
+                    <span>Copy Code</span>
+                </div>
+                <div class="main__controls__button">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Participants</span>
+                </div>
+                <div class="main__controls__button">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Chat</span>
+                </div>
+                <div onclick="leaveMeeting()" class="main__controls__button">
+                    <span class="leave_meeting">Leave Meeting</span>
+                </div>
             </div>
-            <div class="main__controls__block">
-               <div class="main__controls__button">
-                  <i class="fas fa-shield-alt"></i>
-                  <span>Security</span>
-               </div>
-               <div class="main__controls__button">
-                  <i class="fas fa-user-friends"></i>
-                  <span>Participants</span>
-               </div>
-               <div class="main__controls__button">
-                  <i class="fas fa-comment-alt"></i>
-                  <span>Chat</span>
-               </div>
+        </div>
+        <div class="main__right">
+            <div class="main__header">
+                <h6>Chat</h6>
             </div>
-            <div class="main__controls__block">
-               <div onclick="leaveMeeting()" class="main__controls__button">
-                  <span class="leave_meeting">Leave Meeting</span>
-              </div>                          
+            <div class="main__chat_window">
+                <ul class="messages"></ul>
             </div>
-         </div>
-      </div>
-      <div class="main__right">
-         <div class="main__header">
-            <h6>Chat</h6>
-         </div>
-         <div class="main__chat_window">
-            <ul class="messages">
-               
-            </ul>
-
-         </div>
-         <div class="main__message_container">
-            <input id="chat_message" type="text" placeholder="Type message here...">
-         </div>
-      </div>
-   </div>
+            <div class="main__message_container">
+                <input id="chat_message" type="text" placeholder="Type message here..." />
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

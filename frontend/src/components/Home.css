@@ -1,0 +1,31 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Home Page */
+.home-container {
+    margin-top: 100px;
+}
+
+/* Room Page */
+.room-container {
+    text-align: center;
+}
+
+.video-grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+video {
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+}
