@@ -1,5 +1,3 @@
-VISIT THE LINK TO SEE- https://zoom-videomeeting-clone.onrender.com
-
 # Clone Supported:
 - Mute/UnMute Audio & Video
 - Connecting other users through Link
@@ -17,4 +15,6 @@ NodeJs
 - cors
 - ejs
 
-![Screenshot (14)](https://github.com/Kris248/ZOOM-CLONE/assets/92295923/127b0c90-7082-4e20-8712-86eae9db28dc)
+![image](https://github.com/user-attachments/assets/56e48573-e17b-409a-9e69-73e1f5767fd2)
+![image](https://github.com/user-attachments/assets/6c4912f6-e047-4634-8778-3ca827877bf7)
+
