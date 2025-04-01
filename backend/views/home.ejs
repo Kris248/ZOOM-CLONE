@@ -3,39 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom Clone</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .home-container {
-            text-align: center;
-            margin-top: 100px;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            margin: 10px;
-            cursor: pointer;
-        }
-        input {
-            padding: 14px;
-            font-size: 16px;
-            width: 250px;
-            margin-right: 10px;
-        }
-    </style>
+    <title>VMeet - Video Meetings</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <div class="home-container">
-        <h1>Welcome to Zoom Clone</h1>
-        <div>
+
+    <div class="container">
+        <div class="left">
+            <h1>Video calls and meetings for everyone</h1>
+            <p>Connect, collaborate, and celebrate from anywhere with <b>VMeet.</b></p>
+
             <input type="text" id="username" placeholder="Enter Your Name">
+            
+            <div class="buttons">
+                <button class="new-meeting" onclick="startMeeting()">📅 New Meeting</button>
+                <input type="text" id="meetCode" placeholder="Enter a code or link">
+                <button class="join-btn" onclick="joinMeeting()">Join</button>
+            </div>
+            
+            <p class="learn-more"><a href="#">Learn more</a> about VMeet.</p>
         </div>
-        <div class="join-container">
-            <input type="text" id="meetCode" placeholder="Enter Meet Code">
-            <button onclick="joinMeeting()">Join Meeting</button>
+
+        <div class="right">
+            <img src="meet-image.png" alt="Meeting Illustration">
+            <p style="font-size:x-large;">Get a link you can share</p>
+            <p>Click <b>New Meeting</b> to generate a link and invite others.</p>
         </div>
-        <p>or</p>
-        <button onclick="startMeeting()">Start Instant Meeting</button>
     </div>
 
     <script>
@@ -63,5 +56,6 @@
             }
         }
     </script>
+
 </body>
 </html>
