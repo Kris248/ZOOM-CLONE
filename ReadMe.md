@@ -50,8 +50,7 @@ Peer, EJS, Javascript, Socket.io, WebRTC, Node.js, Express.js,
 
 ✅ Breakout Rooms – Create smaller discussion rooms.
 
-📜 License
-This project is open-source and available under the MIT License.
+Thanks for visiting! Would appreciate any suggestions and PR. ❤
 
 💬 Questions or Issues?
 Feel free to raise an issue or submit a pull request!
