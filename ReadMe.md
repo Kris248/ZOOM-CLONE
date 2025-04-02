@@ -1,16 +1,20 @@
 # Features
 ✔ Create & Join Meetings – Generate a meeting link and share it with others.
-✔ WebRTC-Powered Video Calls – Real-time video and audio communication.
 
+✔ WebRTC-Powered Video Calls – Real-time video and audio communication.
 
 ✔ Peer-to-Peer Connection – Uses PeerJS for direct media streaming.
 
-
 ✔ Live Chat – Send and receive messages during a meeting.
+
 ✔ Mute/Unmute Audio – Toggle microphone on/off.
+
 ✔ Start/Stop Video – Turn the camera on/off.
+
 ✔ User Labels – Display participant names under their video.
+
 ✔ Auto-Scroll Chat – Chat window automatically scrolls to the latest messages.
+
 ✔ Responsive UI – Works on desktops, tablets, and mobile devices.
 
 
@@ -27,16 +31,21 @@ Peer, EJS, Javascript, Socket.io, WebRTC, Node.js, Express.js,
 # Known Issues & Fixes
 ❌ Extra Blank Video Appearing
 ✔ Fix: Added a check in addVideoStream() to ensure a user’s video is added only once.
+
 ✔ Fix: Used data-userid attributes to prevent duplicate entries.
 
 ❌ User Disconnect Not Removing Video
 ✔ Fix: Implemented removeVideo(userId) function to clean up UI on disconnection.
+
 ✔ Fix: Ensured peers[userId] is properly deleted when a user leaves.
 
 # Future Improvements
 ✅ Screen Sharing – Allow users to share their screen.
+
 ✅ Recording Feature – Record meetings and save them.
+
 ✅ Authentication System – User login with Google/Auth.
+
 ✅ Breakout Rooms – Create smaller discussion rooms.
 
 📜 License
@@ -44,5 +53,6 @@ This project is open-source and available under the MIT License.
 
 💬 Questions or Issues?
 Feel free to raise an issue or submit a pull request!
+
 Let's build something awesome together.
 
