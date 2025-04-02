@@ -1,7 +1,13 @@
 # Features
 ✔ Create & Join Meetings – Generate a meeting link and share it with others.
+
+
 ✔ WebRTC-Powered Video Calls – Real-time video and audio communication.
+
+
 ✔ Peer-to-Peer Connection – Uses PeerJS for direct media streaming.
+
+
 ✔ Live Chat – Send and receive messages during a meeting.
 ✔ Mute/Unmute Audio – Toggle microphone on/off.
 ✔ Start/Stop Video – Turn the camera on/off.
