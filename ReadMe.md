@@ -30,11 +30,13 @@ Peer, EJS, Javascript, Socket.io, WebRTC, Node.js, Express.js,
 
 # Known Issues & Fixes
 ❌ Extra Blank Video Appearing
+
 ✔ Fix: Added a check in addVideoStream() to ensure a user’s video is added only once.
 
 ✔ Fix: Used data-userid attributes to prevent duplicate entries.
 
 ❌ User Disconnect Not Removing Video
+
 ✔ Fix: Implemented removeVideo(userId) function to clean up UI on disconnection.
 
 ✔ Fix: Ensured peers[userId] is properly deleted when a user leaves.
