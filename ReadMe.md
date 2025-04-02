@@ -1,7 +1,5 @@
 # Features
 ✔ Create & Join Meetings – Generate a meeting link and share it with others.
-
-
 ✔ WebRTC-Powered Video Calls – Real-time video and audio communication.
 
 
